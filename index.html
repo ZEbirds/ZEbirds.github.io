@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[你的名字] | 个人作品集</title>
+    <title>[Your Name] | Personal Portfolio</title>
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -18,61 +18,116 @@
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
+            overflow-x: hidden;
         }
+        
+        /* Initial Screen Animation */
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
         header {
             background-color: var(--primary-color);
             color: white;
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             text-align: center;
         }
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease-out forwards;
         }
         header p {
             font-size: 1.2rem;
             color: #bdc3c7;
-            margin-top: 10px;
+            margin-top: 15px;
+            opacity: 0;
+            animation: fadeInDown 0.8s ease-out 0.3s forwards;
         }
+        
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
         }
+
+        /* Section Base Styles & Hover Effects */
         section {
             background: white;
-            border-radius: 8px;
-            padding: 2rem;
+            border-radius: 12px;
+            padding: 2.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+        }
+
+        /* Scroll Animation Initial State */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, visibility;
+        }
+        /* Scroll Animation Trigger State */
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
         h2 {
             color: var(--primary-color);
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 0.5rem;
             display: inline-block;
+            margin-top: 0;
         }
+        
+        /* Tag Animations */
         .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 12px;
+            margin-top: 15px;
         }
         .tag {
             background: var(--bg-color);
             color: var(--primary-color);
-            padding: 5px 12px;
+            padding: 6px 15px;
             border-radius: 20px;
             font-size: 0.9rem;
             border: 1px solid #ddd;
+            transition: all 0.3s ease;
+            cursor: default;
         }
+        .tag:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
         .project {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            padding-left: 1rem;
+            border-left: 3px solid #eee;
+            transition: border-color 0.3s ease;
+        }
+        .project:hover {
+            border-left-color: var(--accent-color);
         }
         .project h3 {
+            margin-top: 0;
             margin-bottom: 0.5rem;
             color: var(--primary-color);
         }
+        
         footer {
             text-align: center;
             padding: 2rem;
@@ -82,8 +137,10 @@
         a {
             color: var(--accent-color);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
         a:hover {
+            color: #2980b9;
             text-decoration: underline;
         }
     </style>
@@ -91,16 +148,16 @@
 <body>
 
     <header>
-        <h1>[你的中文或英文名]</h1>
-        <p>Robotics Researcher | 聚焦具身智能与家庭服务机器人</p>
+        <h1>Zibo Zheng</h1>
+        <p>Robotics Researcher | Focusing on Embodied AI & Home Service Robots</p>
     </header>
 
     <div class="container">
         
-        <section id="about">
-            <h2>关于我</h2>
-            <p>你好！我是宁波诺丁汉大学（UNNC）机械工程专业的本科生，即将前往宾夕法尼亚大学（UPenn）攻读机器人学硕士学位。</p>
-            <p>我对具身智能（Embodied AI）和机器人自主导航充满热情。我的长期职业目标是进入工业界成为一名研究员，致力于将高层自然语言指令与底层物理行为相连接，开发真正对用户友好、能走进千家万户的家庭服务机器人。</p>
+        <section id="about" class="fade-in-section">
+            <h2>About Me</h2>
+            <p>Hello! I am an undergraduate student majoring in Mechanical Engineering at the University of Nottingham Ningbo China (UNNC), and I will soon be pursuing a Master's degree in Robotics at the University of Pennsylvania (UPenn).</p>
+            <p>I am deeply passionate about Embodied AI and autonomous robot navigation. My long-term career goal is to become an industry researcher, dedicated to bridging high-level human natural language instructions with low-level physical robot behaviors, ultimately developing consumer-facing service robots that are truly user-friendly for domestic environments.</p>
             <div class="tags">
                 <span class="tag">Python</span>
                 <span class="tag">C++</span>
@@ -111,52 +168,68 @@
             </div>
         </section>
 
-        <section id="projects">
-            <h2>研究与项目经历</h2>
+        <section id="projects" class="fade-in-section">
+            <h2>Research & Projects</h2>
             
             <div class="project">
-                <h3>空间认知与语义导航研究</h3>
-                <p>参与开发载体-关系场景图（CRSG），研究机器人在复杂环境下的开放词汇导航（Open-Vocabulary Navigation）。在静态查询任务中实现了 82.4% 的成功率，并在长序列零样本导航用例中表现优异。</p>
+                <h3>Spatial Cognition & Semantic Navigation</h3>
+                <p>Participated in the development of the Carrier-Relationship Scene Graph (CRSG) to study Open-Vocabulary Navigation in complex environments. Our method achieved an 82.4% success rate on Static Query tasks and ranked first in 90% of Long Sequence Zero-shot Navigation cases.</p>
             </div>
 
             <div class="project">
-                <h3>机器人感知与规划基础研究</h3>
-                <p>在剑桥大学参与为期一年的项目，专注于机器人感知与自主性开发。此外，也曾主导开发基于 4D LiDAR 与毫米波雷达融合的低能见度环境 SLAM 技术。</p>
+                <h3>Foundations of Robotic Perception & Planning</h3>
+                <p>Engaged in a year-long project at the University of Cambridge, focusing on robotic perception and autonomy. Additionally, led the development of SLAM technology fusing 4D LiDAR and millimeter-wave radar for low-visibility environments.</p>
             </div>
 
             <div class="project">
-                <h3>dToF 传感器交互式可视化系统</h3>
-                <p>独立架构并使用 Python 和 PyQtGraph 开发了前端可视化工具，实现了传感器数据的实时渲染与交互。</p>
+                <h3>Interactive Visualization System for dToF Sensors</h3>
+                <p>Independently architected and developed a frontend visualization tool using Python and PyQtGraph, enabling real-time rendering and seamless interaction with sensor data.</p>
             </div>
         </section>
 
-        <section id="honors">
-            <h2>荣誉奖项</h2>
+        <section id="honors" class="fade-in-section">
+            <h2>Honors & Awards</h2>
             <ul>
-                <li>国家奖学金 (National Scholarship)</li>
-                <li>省优秀毕业生 (Provincial Outstanding Graduate)</li>
+                <li>National Scholarship</li>
+                <li>Provincial Outstanding Graduate</li>
             </ul>
         </section>
 
-        <section id="life">
-            <h2>生活与爱好</h2>
-            <p>在科研和代码之外，我热爱街舞文化（Street Dance）。我经常在校园内外参加和组织街舞表演及比赛，这不仅锻炼了我的身体，也培养了我的团队协作与舞台表现力。</p>
+        <section id="life" class="fade-in-section">
+            <h2>Life & Hobbies</h2>
+            <p>Outside of research and coding, I am an active participant in street dance culture. I frequently organize and perform in street dance competitions both on and off-campus. This passion not only keeps me physically active but also significantly enhances my teamwork skills and stage presence.</p>
         </section>
 
-        <section id="contact">
-            <h2>联系方式</h2>
-            <p>欢迎与我交流技术或探讨合作！</p>
+        <section id="contact" class="fade-in-section">
+            <h2>Contact</h2>
+            <p>Always open to discussing technology or exploring collaborations!</p>
             <ul>
-                <li>Email: <a href="mailto:[你的邮箱@example.com]">[你的邮箱@example.com]</a></li>
-                <li>GitHub: <a href="https://github.com/[你的GitHub用户名]" target="_blank">github.com/[你的GitHub用户名]</a></li>
+                <li>Email: <a href="mailto:zibo_zhengzzb@163.com">zibo_zhengzzb@163.com</a></li>
+                <li>GitHub: <a href="https://github.com/ZEbirds" target="_blank">github.com/ZEbirds</a></li>
             </ul>
         </section>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 [你的名字]. Built with GitHub Pages.</p>
+        <p>&copy; 2026 [Your Name]. Built with GitHub Pages.</p>
     </footer>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            const hiddenElements = document.querySelectorAll('.fade-in-section');
+            hiddenElements.forEach((el) => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
