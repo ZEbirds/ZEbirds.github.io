@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zibo Zheng | Personal Portfolio</title>
     <style>
-        /* 重新设计的配色方案：低饱和度、专业深色调 */
+        /* 极致简约的浅色系全局变量 */
         :root {
-            --text-main: #f5f6fa;
-            --text-muted: #a4b0be;
-            --accent: #70a1ff; /* 柔和的浅蓝色 */
-            --glass-bg: rgba(30, 39, 46, 0.75); /* 深色半透明 */
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --text-main: #2c3e50;    /* 深灰蓝色，比纯黑更柔和高级 */
+            --text-muted: #7f8c8d;   /* 浅灰色，用于辅助文本 */
+            --accent: #3498db;       /* 清爽的科技蓝 */
+            --glass-bg: rgba(255, 255, 255, 0.85); /* 明亮的半透明白 */
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.04); /* 非常轻柔的阴影 */
         }
 
+        /* 极其微弱、干净的背景呼吸渐变 */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -27,8 +28,8 @@
             margin: 0;
             padding: 0;
             color: var(--text-main);
-            /* 更换为沉稳的深色渐变：深灰、海军蓝与墨绿 */
-            background: linear-gradient(-45deg, #2c3e50, #1a1a2e, #16213e, #0f3460);
+            /* 干净的浅色动态背景 */
+            background: linear-gradient(-45deg, #ffffff, #f0f2f5, #eef2f3, #f8f9fa);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             min-height: 100vh;
@@ -39,14 +40,15 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-            gap: 2rem;
+            gap: 2.5rem;
             align-items: flex-start;
         }
 
+        /* 浅色毛玻璃效果 */
         .glass-panel {
             background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             box-shadow: var(--glass-shadow);
@@ -71,10 +73,10 @@
             border-radius: 50%;
             object-fit: cover;
             margin: 0 auto 1.5rem auto;
-            border: 4px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 4px solid #fff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background-color: #2f3542; 
+            background-color: #f8f9fa; 
         }
         
         .sidebar:hover .avatar {
@@ -83,15 +85,16 @@
 
         .sidebar h1 {
             margin: 0 0 0.5rem 0;
-            font-size: 2rem;
+            font-size: 2.2rem;
             letter-spacing: -0.5px;
-            color: #fff;
+            color: var(--text-main);
         }
 
         .sidebar p {
             color: var(--text-muted);
-            font-size: 1rem;
+            font-size: 1.05rem;
             margin-bottom: 2rem;
+            font-weight: 500;
         }
 
         .contact-links {
@@ -119,7 +122,7 @@
         }
 
         .contact-links a:hover {
-            color: #fff;
+            color: #2980b9;
             text-decoration: underline;
         }
 
@@ -136,29 +139,30 @@
 
         section:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            background: rgba(47, 53, 66, 0.85);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         h2 {
             margin-top: 0;
-            font-size: 1.5rem;
-            color: #fff;
+            font-size: 1.6rem;
+            color: var(--text-main);
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             margin-bottom: 1.5rem;
         }
 
+        /* 动态下划线 */
         h2::after {
             content: '';
             position: absolute;
             left: 0;
             bottom: 0;
-            height: 3px;
+            height: 4px;
             width: 40px;
             background: var(--accent);
             border-radius: 2px;
-            transition: width 0.3s ease;
+            transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         section:hover h2::after {
@@ -173,9 +177,9 @@
         }
 
         .tag {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-main);
+            background: #f1f2f6;
+            border: 1px solid transparent;
+            color: var(--text-muted);
             padding: 6px 16px;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -185,33 +189,32 @@
 
         .tag:hover {
             background: var(--accent);
-            color: #1a1a2e;
+            color: white;
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 5px 15px rgba(112, 161, 255, 0.4);
-            border-color: var(--accent);
-            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
         }
 
         .project {
             margin-bottom: 2rem;
             padding: 1.5rem;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid transparent;
+            background: rgba(248, 249, 250, 0.5);
+            border: 1px solid rgba(0,0,0,0.03);
             transition: all 0.3s ease;
             position: relative;
         }
 
         .project:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(255, 255, 255, 0.1);
+            background: #ffffff;
+            border-color: rgba(0,0,0,0.08);
             transform: translateX(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
 
         .project h3 {
             margin-top: 0;
             margin-bottom: 0.3rem;
-            color: #fff;
+            color: var(--text-main);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -227,7 +230,7 @@
         .github-link {
             font-size: 0.85rem;
             color: var(--text-muted);
-            background: rgba(255,255,255,0.1);
+            background: #f1f2f6;
             padding: 4px 12px;
             border-radius: 15px;
             text-decoration: none;
@@ -236,15 +239,15 @@
         }
 
         .github-link:hover {
-            background: var(--accent);
-            color: #1a1a2e;
-            border-color: var(--accent);
+            background: var(--text-main);
+            color: white;
         }
 
         .project:last-child {
             margin-bottom: 0;
         }
 
+        /* 滚动出现动画 */
         .fade-in-element {
             opacity: 0;
             transform: translateY(30px) scale(0.98);
@@ -259,13 +262,14 @@
 
         ul.custom-list {
             padding-left: 1.2rem;
-            color: var(--text-muted);
+            color: var(--text-main);
         }
         ul.custom-list li {
             margin-bottom: 0.8rem;
         }
         ul.custom-list strong {
             color: var(--text-main);
+            font-weight: 600;
         }
 
         @media (max-width: 850px) {
@@ -287,10 +291,10 @@
     <div class="layout-wrapper">
         
         <aside class="sidebar glass-panel fade-in-element is-visible">
-            <img class="avatar" src="https://github.com/ZEbirds/ZEbirds.github.io/blob/main/portrait.jpg" alt="Avatar">
+            <img class="avatar" src="portrait.jpg" alt="Avatar">
             
             <h1>Zibo Zheng</h1>
-            <p>Robotics Researcher<br>Embodied AI & Home Service Robots</p>
+            <p>Robotics Researcher<br>Embodied AI | VLN | VLA</p>
             
             <ul class="contact-links">
                 <li><strong>Phone:</strong> <br>+86 13959185819</li>
