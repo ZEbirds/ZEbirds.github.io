@@ -3,217 +3,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Your Name] | Personal Portfolio</title>
+    <title>Zibo Zheng | Personal Portfolio</title>
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --bg-color: #f8f9fa;
-            --text-color: #333;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --accent: #0984e3;
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
         }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-        }
-        
-        /* Initial Screen Animation */
-        @keyframes fadeInDown {
-            0% { opacity: 0; transform: translateY(-30px); }
-            100% { opacity: 1; transform: translateY(0); }
+            color: var(--text-main);
+            background: linear-gradient(-45deg, #f3e7e9, #e3eeff, #e0c3fc, #8ec5fc);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
         }
 
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 5rem 2rem;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.8rem;
-            opacity: 0;
-            animation: fadeInDown 0.8s ease-out forwards;
-        }
-        header p {
-            font-size: 1.2rem;
-            color: #bdc3c7;
-            margin-top: 15px;
-            opacity: 0;
-            animation: fadeInDown 0.8s ease-out 0.3s forwards;
-        }
-        
-        .container {
-            max-width: 900px;
+        .layout-wrapper {
+            display: flex;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            gap: 2rem;
+            align-items: flex-start;
         }
 
-        /* Section Base Styles & Hover Effects */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .sidebar {
+            flex: 0 0 320px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: sticky;
+            top: 2rem;
+            transition: transform 0.4s ease;
+        }
+        
+        .sidebar:hover {
+            transform: translateY(-5px);
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem auto;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background-color: #dfe6e9; 
+        }
+        
+        .sidebar:hover .avatar {
+            transform: scale(1.05) rotate(3deg);
+        }
+
+        .sidebar h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .contact-links li {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-links a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            word-break: break-all;
+        }
+
+        .contact-links a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0; 
+        }
+
         section {
-            background: white;
-            border-radius: 12px;
             padding: 2.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
         }
 
-        /* Scroll Animation Initial State */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, visibility;
-        }
-        /* Scroll Animation Trigger State */
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: none;
+        section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(31, 38, 135, 0.1);
+            background: rgba(255, 255, 255, 0.8);
         }
 
         h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5rem;
-            display: inline-block;
             margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 1.5rem;
         }
-        
-        /* Tag Animations */
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 40px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        section:hover h2::after {
+            width: 80px;
+        }
+
         .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 15px;
+            gap: 10px;
+            margin-top: 1rem;
         }
+
         .tag {
-            background: var(--bg-color);
-            color: var(--primary-color);
-            padding: 6px 15px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            color: var(--text-main);
+            padding: 6px 16px;
             border-radius: 20px;
             font-size: 0.9rem;
-            border: 1px solid #ddd;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             cursor: default;
         }
+
         .tag:hover {
-            background: var(--primary-color);
+            background: var(--accent);
             color: white;
-            border-color: var(--primary-color);
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(9, 132, 227, 0.3);
+            border-color: var(--accent);
         }
 
         .project {
             margin-bottom: 2rem;
-            padding-left: 1rem;
-            border-left: 3px solid #eee;
-            transition: border-color 0.3s ease;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
         }
+
         .project:hover {
-            border-left-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateX(10px);
         }
+
         .project h3 {
             margin-top: 0;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: #7f8c8d;
+
+        .project .meta {
             font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
         }
-        a {
-            color: var(--accent-color);
+
+        .github-link {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: rgba(0,0,0,0.05);
+            padding: 4px 10px;
+            border-radius: 15px;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
-        a:hover {
-            color: #2980b9;
-            text-decoration: underline;
+
+        .github-link:hover {
+            background: var(--text-main);
+            color: white;
+        }
+
+        .project:last-child {
+            margin-bottom: 0;
+        }
+
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            will-change: opacity, transform;
+        }
+
+        .fade-in-element.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        ul.custom-list {
+            padding-left: 1.2rem;
+        }
+        ul.custom-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 850px) {
+            .layout-wrapper {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .sidebar {
+                flex: none;
+                width: auto;
+                position: relative;
+                top: 0;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Zibo Zheng</h1>
-        <p>Robotics Researcher | Focusing on Embodied AI & Home Service Robots</p>
-    </header>
-
-    <div class="container">
+    <div class="layout-wrapper">
         
-        <section id="about" class="fade-in-section">
-            <h2>About Me</h2>
-            <p>Hello! I am an undergraduate student majoring in Mechanical Engineering at the University of Nottingham Ningbo China (UNNC), and I will soon be pursuing a Master's degree in Robotics at the University of Pennsylvania (UPenn).</p>
-            <p>I am deeply passionate about Embodied AI and autonomous robot navigation. My long-term career goal is to become an industry researcher, dedicated to bridging high-level human natural language instructions with low-level physical robot behaviors, ultimately developing consumer-facing service robots that are truly user-friendly for domestic environments.</p>
-            <div class="tags">
-                <span class="tag">Python</span>
-                <span class="tag">C++</span>
-                <span class="tag">ROS Noetic</span>
-                <span class="tag">SLAM</span>
-                <span class="tag">Computer Vision</span>
-                <span class="tag">VLA Models</span>
-            </div>
-        </section>
-
-        <section id="projects" class="fade-in-section">
-            <h2>Research & Projects</h2>
+        <aside class="sidebar glass-panel fade-in-element is-visible">
+            <img class="avatar" src="https://via.placeholder.com/150" alt="Avatar">
             
-            <div class="project">
-                <h3>Spatial Cognition & Semantic Navigation</h3>
-                <p>Participated in the development of the Carrier-Relationship Scene Graph (CRSG) to study Open-Vocabulary Navigation in complex environments. Our method achieved an 82.4% success rate on Static Query tasks and ranked first in 90% of Long Sequence Zero-shot Navigation cases.</p>
-            </div>
-
-            <div class="project">
-                <h3>Foundations of Robotic Perception & Planning</h3>
-                <p>Engaged in a year-long project at the University of Cambridge, focusing on robotic perception and autonomy. Additionally, led the development of SLAM technology fusing 4D LiDAR and millimeter-wave radar for low-visibility environments.</p>
-            </div>
-
-            <div class="project">
-                <h3>Interactive Visualization System for dToF Sensors</h3>
-                <p>Independently architected and developed a frontend visualization tool using Python and PyQtGraph, enabling real-time rendering and seamless interaction with sensor data.</p>
-            </div>
-        </section>
-
-        <section id="honors" class="fade-in-section">
-            <h2>Honors & Awards</h2>
-            <ul>
-                <li>National Scholarship</li>
-                <li>Provincial Outstanding Graduate</li>
+            <h1>Zibo Zheng [cite: 1]</h1>
+            <p>Robotics Researcher<br>Embodied AI & Home Service Robots</p>
+            
+            <ul class="contact-links">
+                <li><strong>Phone:</strong> <br>+86 13959185819 [cite: 2]</li>
+                <li><strong>Email:</strong> <br><a href="mailto:ZiboZhengZZB@163.com">ZiboZhengZZB@163.com [cite: 2]</a></li>
+                <li><strong>GitHub:</strong> <br><a href="#" target="_blank">[Insert GitHub Link Here]</a></li>
+                <li><strong>Location:</strong> <br>Ningbo -> Philadelphia</li>
             </ul>
-        </section>
 
-        <section id="life" class="fade-in-section">
-            <h2>Life & Hobbies</h2>
-            <p>Outside of research and coding, I am an active participant in street dance culture. I frequently organize and perform in street dance competitions both on and off-campus. This passion not only keeps me physically active but also significantly enhances my teamwork skills and stage presence.</p>
-        </section>
+            <div class="tags" style="justify-content: center;">
+                <span class="tag">C++ [cite: 97]</span>
+                <span class="tag">Python [cite: 97]</span>
+                <span class="tag">ROS Noetic [cite: 53]</span>
+                <span class="tag">SLAM [cite: 52]</span>
+            </div>
+        </aside>
 
-        <section id="contact" class="fade-in-section">
-            <h2>Contact</h2>
-            <p>Always open to discussing technology or exploring collaborations!</p>
-            <ul>
-                <li>Email: <a href="mailto:zibo_zhengzzb@163.com">zibo_zhengzzb@163.com</a></li>
-                <li>GitHub: <a href="https://github.com/ZEbirds" target="_blank">github.com/ZEbirds</a></li>
-            </ul>
-        </section>
+        <main class="main-content">
+            
+            <section id="about" class="glass-panel fade-in-element">
+                <h2>About Me</h2>
+                <p>Hello! I am an undergraduate student majoring in Mechanical Engineering at the University of Nottingham Ningbo China (UNNC) [cite: 3, 4], currently holding a rank of 2/65 in my cohort[cite: 6]. My thesis focuses on <em>SMEAC-Nav: A Semantic Memory-Enhanced Framework for Long-Horizon Embodied Navigation</em>[cite: 7]. I will soon be pursuing a Master's degree in Robotics at the University of Pennsylvania (UPenn).</p>
+                <p>I am deeply passionate about Embodied AI and autonomous robot navigation. My long-term career goal is to become an industry researcher, dedicated to bridging high-level human natural language instructions with low-level physical robot behaviors, ultimately developing consumer-facing service robots that are truly user-friendly for domestic environments.</p>
+            </section>
 
+            <section id="publications" class="glass-panel fade-in-element">
+                <h2>Publications</h2>
+                <ul class="custom-list">
+                    <li><strong>Zheng, Z.*</strong>, Tang, Y., Wang, M., Deng, Y., et al. (2025) 'OpenObject-NAV: Open-vocabulary Object-oriented Navigation based on Dynamic Carrier-relationship Scene Graph', <em>2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</em>[cite: 16, 17].</li>
+                    <li>Tang, Y., Wang, M., Deng, Y., <strong>Zheng, Z.</strong>, et al. (2025) 'OpenIN: Open-vocabulary instance-oriented navigation in dynamic domestic environments', <em>IEEE Robotics and Automation Letters</em>[cite: 13, 14].</li>
+                    <li><strong>Zheng, Z.</strong> (2024) 'The development and analysis of 3D feature Reconstruction Technology for Service Robot Slam system in restaurant environment', <em>2024 2nd International Conference on Image, Algorithms and Artificial Intelligence (ICIAAI)</em>[cite: 18].</li>
+                </ul>
+            </section>
+
+            <section id="experience" class="glass-panel fade-in-element">
+                <h2>Research & Industry Experience</h2>
+                
+                <div class="project">
+                    <h3>
+                        Vision-Language Navigation in Humanoid Robots
+                        <a href="#" class="github-link" target="_blank">[Add GitHub Link]</a>
+                    </h3>
+                    <div class="meta">Zhejiang Humanoid Robot Innovation Center | Mar 2026 - Present [cite: 83, 85]</div>
+                    <p>Deployed Vision-Language Navigation (VLN) models onto physical humanoid robot platforms by optimizing a hierarchical decision-making architecture[cite: 86]. Engineered a semi-autonomous data collection pipeline generating over 100,000 instruction-trajectory pairs to accelerate VLA model training[cite: 87].</p>
+                </div>
+
+                <div class="project">
+                    <h3>
+                        Spatial Cognition and Intelligent Navigation
+                        <a href="#" class="github-link" target="_blank">[Add GitHub Link]</a>
+                    </h3>
+                    <div class="meta">Beijing Institute of Technology | Mar 2024 - May 2025 [cite: 21, 22]</div>
+                    <p>Proposed the Carrier-Relationship Scene Graph (CRSG) to distinguish static carriers and movable objects for dynamic scene updating[cite: 25]. Developed an instance navigation strategy integrating commonsense knowledge from LLMs and visual-language feature similarity[cite: 27]. Extended the system to support multimodal and open-vocabulary instructions, validating performance across Habitat simulations and real-world Autolabor platforms[cite: 33, 39].</p>
+                </div>
+
+                <div class="project">
+                    <h3>
+                        SLAM for Low-visibility Environments
+                        <a href="#" class="github-link" target="_blank">[Add GitHub Link]</a>
+                    </h3>
+                    <div class="meta">University of Nottingham Ningbo China | Jun 2024 - Nov 2024 [cite: 45, 48]</div>
+                    <p>Designed a multi-sensor fusion platform targeting applications in disaster response and industrial inspection[cite: 49]. Built a sensor integration framework for 4D LiDAR, millimeter-wave radar, and IMU modules [cite: 50], and implemented basic ROS Noetic modules for sensor synchronization[cite: 53].</p>
+                </div>
+
+                <div class="project">
+                    <h3>
+                        Interactive dToF Visualization Platform
+                        <a href="#" class="github-link" target="_blank">[Add GitHub Link]</a>
+                    </h3>
+                    <div class="meta">Anker Innovations Technology | Aug 2024 - Oct 2024 [cite: 75, 78]</div>
+                    <p>Implemented peak detection methods in C++ to improve dToF depth estimation and integrated post-processing techniques to reconstruct 3D surfaces[cite: 79, 80]. Built a real-time data pipeline linked with a PyQtGraph-based frontend for 3D point cloud display and user interaction[cite: 81].</p>
+                </div>
+
+                <div class="project">
+                    <h3>
+                        Multi-Sensor Fusion & Path Planning
+                        <a href="#" class="github-link" target="_blank">[Add GitHub Link]</a>
+                    </h3>
+                    <div class="meta">University of Cambridge | Jul 2023 - May 2024 [cite: 56, 59]</div>
+                    <p>Developed Kalman filter sensor fusion algorithms integrating LiDAR, radar, and camera data[cite: 60]. Designed an automatic parameter optimization pipeline that reduced trajectory error by around 40% and improved dynamic obstacle avoidance success rate to 98%[cite: 61, 62]. Implemented and evaluated Wavefront, A*, Hybrid A*, and Q-Learning algorithms in MATLAB[cite: 65].</p>
+                </div>
+            </section>
+
+            <section id="honors" class="glass-panel fade-in-element">
+                <h2>Honors & Awards</h2>
+                <ul class="custom-list">
+                    <li><strong>National Scholarship</strong> (24/25, Top 0.2%) [cite: 8]</li>
+                    <li><strong>Zhejiang Excellent Graduates / Provincial Outstanding Graduate</strong> (Top 3%) [cite: 8]</li>
+                    <li><strong>Provost's Scholarship</strong> (23/24 & 24/25, Top 5%) [cite: 8]</li>
+                    <li><strong>UNNC Outstanding Students / Graduates</strong> (Top 5%) [cite: 8]</li>
+                </ul>
+            </section>
+
+            <section id="life" class="glass-panel fade-in-element">
+                <h2>Life & Hobbies</h2>
+                <p>Outside of research and coding, I am an active participant in street dance culture. As the Popping Team Leader of the Shuffle Crew Dance Society at UNNC, I organized training sessions and coordinated collaborations with local studios[cite: 89, 90, 91, 93]. I recently led my team to win 2nd place in the 4v4 Freestyle at the 2nd Ningbo Intercollegiate Street Dance Competition[cite: 93, 94].</p>
+            </section>
+
+        </main>
     </div>
-
-    <footer>
-        <p>&copy; 2026 [Your Name]. Built with GitHub Pages.</p>
-    </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -224,10 +385,11 @@
                     }
                 });
             }, {
-                threshold: 0.1
+                threshold: 0.05,
+                rootMargin: "0px 0px -50px 0px"
             });
 
-            const hiddenElements = document.querySelectorAll('.fade-in-section');
+            const hiddenElements = document.querySelectorAll('.fade-in-element:not(.is-visible)');
             hiddenElements.forEach((el) => observer.observe(el));
         });
     </script>
