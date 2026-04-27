@@ -3,358 +3,437 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zibo Zheng | Personal Website</title>
+    <title>Zibo Zheng | PRISM Portfolio</title>
     <style>
-        /* 复刻 PRISM 的极简配色和排版规范 */
+        /* =========================================
+           PRISM 官方核心 CSS 变量 (精确提取自 global.css)
+           ========================================= */
         :root {
-            --bg-color: #ffffff;
-            --text-main: #111827;      /* 深灰色，比纯黑更有呼吸感 */
-            --text-muted: #6b7280;     /* 辅助文字灰色 */
-            --border-color: #e5e7eb;   /* 极浅的边框色 */
-            --border-hover: #9ca3af;   /* 鼠标悬停时的边框加深色 */
-            --accent-color: #2563eb;   /* 链接点缀色 */
-            --bg-muted: #f9fafb;       /* 卡片或标签的浅灰背景 */
+            --background: #fefffe;
+            --foreground: #0f172a;
+            
+            /* Brand colors - Deep Navy & Gold */
+            --primary: #1e293b;
+            --primary-light: #334155;
+            --accent: #d4a562;
+            --accent-light: #e4b976;
+            --accent-dark: #b8914d;
+            
+            /* Neutral colors */
+            --neutral-50: #f8fafc;
+            --neutral-100: #f1f5f9;
+            --neutral-200: #e2e8f0;
+            --neutral-400: #94a3b8;
+            --neutral-500: #64748b;
+            --neutral-600: #475569;
+            --neutral-700: #334155;
+            --neutral-800: #1e293b;
+
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-serif: 'Georgia', 'Georgia CDN', serif;
         }
 
-        * {
-            box-sizing: border-box;
-        }
-
+        /* 全局基础重置 */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.7;
-            margin: 0;
-            padding: 0;
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+            line-height: 1.5;
             -webkit-font-smoothing: antialiased;
         }
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
-        /* 核心布局：控制最大宽度并居中 */
-        .container {
-            max-width: 768px; /* PRISM 经典的窄版阅读宽度 */
+        /* =========================================
+           布局系统 (精确对应 HomePageClient.tsx)
+           ========================================= */
+        .max-w-6xl {
+            max-width: 72rem; /* 1152px */
             margin: 0 auto;
-            padding: 4rem 1.5rem;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        @media (min-width: 1024px) {
+            .grid-layout { grid-template-columns: 1fr 2fr; }
         }
 
-        /* 头部信息 */
-        header {
+        /* =========================================
+           侧边栏组件 (Profile.tsx)
+           ========================================= */
+        .sidebar {
+            position: sticky;
+            top: 2rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+        .avatar-container {
+            width: 16rem; /* w-64 */
+            height: 16rem; /* h-64 */
+            margin: 0 auto 1.5rem auto;
+            border-radius: 1rem; /* rounded-2xl */
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* shadow-lg */
+            transition: all 0.2s;
+        }
+        .avatar-container:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-text { text-align: center; margin-bottom: 1.5rem; }
+        .profile-name {
+            font-family: var(--font-serif);
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .profile-title {
+            font-size: 1.125rem; /* text-lg */
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        .profile-inst { color: var(--neutral-600); margin-bottom: 0.5rem; }
+        
+        .social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .social-icons a {
+            color: var(--neutral-600);
+            transition: color 0.2s;
+            display: inline-flex;
+            padding: 0.5rem;
+        }
+        .social-icons a:hover { color: var(--accent); }
+        .social-icons svg { width: 1.25rem; height: 1.25rem; } /* h-5 w-5 */
+
+        .research-interests {
+            background-color: var(--neutral-100);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.2s;
+        }
+        .research-interests:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: scale(1.02);
+        }
+        .research-title { font-weight: 600; color: var(--primary); margin-bottom: 0.75rem; }
+        .research-list { font-size: 0.875rem; color: var(--neutral-700); line-height: 1.75; }
+
+        .like-btn {
             display: flex;
             align-items: center;
-            gap: 2rem;
-            margin-bottom: 4rem;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 0 auto;
+            background-color: var(--neutral-100);
+            color: var(--neutral-700);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .like-btn:hover {
+            background-color: #fef2f2; /* red-50 equivalent */
+            color: #dc2626; /* red-600 equivalent */
         }
 
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            background-color: var(--bg-muted);
-            border: 1px solid var(--border-color);
-        }
-
-        .header-info h1 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            margin: 0 0 0.5rem 0;
-            letter-spacing: -0.025em;
-        }
-
-        .header-info p {
-            font-size: 1.125rem;
-            color: var(--text-muted);
-            margin: 0 0 1rem 0;
-        }
-
-        .social-links {
+        /* =========================================
+           主内容区 & 排版系统 (About.tsx / TextPage)
+           ========================================= */
+        .main-content {
             display: flex;
-            gap: 1.5rem;
+            flex-direction: column;
+            gap: 2rem; /* space-y-8 */
+        }
+        section { animation: fadeInUp 0.6s ease-out forwards; opacity: 0; }
+        section:nth-child(1) { animation-delay: 0.2s; }
+        section:nth-child(2) { animation-delay: 0.4s; }
+        section:nth-child(3) { animation-delay: 0.5s; }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .prose {
+            color: var(--neutral-700);
+            line-height: 1.625; /* leading-relaxed */
+        }
+        .prose p { margin-bottom: 1rem; }
+        .prose strong { font-weight: 600; color: var(--primary); }
+        .prose a {
+            color: var(--accent);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .prose a:hover {
+            background-color: rgba(212, 165, 98, 0.1);
+            border-radius: 0.25rem;
         }
 
-        .social-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.2s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--text-main);
-        }
-
-        /* 章节通用样式 */
-        section {
-            margin-bottom: 4rem;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-top: 0;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.75rem;
-            letter-spacing: -0.025em;
-        }
-
-        /* PRISM 风格的极简卡片 */
-        .card {
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            margin-bottom: 1.25rem;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-            background-color: var(--bg-color);
-        }
-
-        .card:hover {
-            border-color: var(--border-hover);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-
-        .card-header {
+        /* =========================================
+           论文卡片组件 (SelectedPublications.tsx)
+           ========================================= */
+        .pub-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 0.5rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 1rem;
         }
-
-        .card-title {
-            font-weight: 600;
-            font-size: 1.125rem;
-            margin: 0;
-            color: var(--text-main);
-        }
-
-        .card-date {
+        .view-all {
+            color: var(--accent);
             font-size: 0.875rem;
-            color: var(--text-muted);
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        }
-
-        .card-meta {
-            font-size: 0.95rem;
-            color: var(--text-main);
             font-weight: 500;
-            margin-bottom: 0.75rem;
+            transition: color 0.2s;
         }
-
-        .card-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin: 0;
+        .view-all:hover { color: var(--accent-dark); }
+        
+        .pub-list { display: flex; flex-direction: column; gap: 1rem; }
+        .pub-card {
+            background-color: var(--neutral-50);
+            padding: 1rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            border: 1px solid var(--neutral-200);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+            transition: all 0.2s;
         }
-
-        /* 论文列表特殊样式 */
-        .pub-item {
-            margin-bottom: 1.5rem;
+        .pub-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: scale(1.02);
         }
-
         .pub-title {
             font-weight: 600;
-            margin-bottom: 0.25rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.25;
+        }
+        .pub-authors { font-size: 0.875rem; color: var(--neutral-600); margin-bottom: 0.25rem; }
+        .pub-authors strong { font-weight: 600; color: var(--accent); }
+        .pub-venue { font-size: 0.875rem; color: var(--neutral-600); margin-bottom: 0.5rem; }
+        .pub-desc {
+            font-size: 0.875rem;
+            color: var(--neutral-500);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .pub-authors {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 0.25rem;
+        /* =========================================
+           项目经历组件 (CardPage.tsx)
+           ========================================= */
+        .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+        .exp-card {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            border: 1px solid var(--neutral-200);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            transition: all 0.2s;
         }
-
-        .pub-venue {
-            font-size: 0.95rem;
-            font-style: italic;
-            color: var(--text-main);
+        .exp-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: scale(1.01);
         }
-
-        /* 标签 */
-        .tags {
+        .exp-header {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .tag {
-            background-color: var(--bg-muted);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 0.125rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        ul {
-            padding-left: 1.25rem;
-            color: var(--text-muted);
-        }
-
-        ul li {
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 0.5rem;
         }
-
-        strong {
-            color: var(--text-main);
+        .exp-title { font-size: 1.125rem; font-weight: 600; color: var(--primary); }
+        .exp-date {
+            font-size: 0.875rem;
+            color: var(--neutral-500);
+            font-weight: 500;
+            background-color: var(--neutral-100);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
         }
+        .exp-subtitle { font-size: 0.95rem; color: var(--accent); font-weight: 500; margin-bottom: 0.75rem; }
+        .exp-content { font-size: 0.95rem; color: var(--neutral-600); line-height: 1.625; }
 
-        /* 响应式调整 */
-        @media (max-width: 640px) {
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1.5rem;
-            }
-            .avatar {
-                width: 96px;
-                height: 96px;
-            }
+        /* 动画关键帧 */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <header>
-            <img class="avatar" src="portrait.jpg" alt="Zibo Zheng">
-            <div class="header-info">
-                <h1>Zibo Zheng</h1>
-                <p>Robotics Researcher · Embodied AI & VLN</p>
-                <div class="social-links">
-                    <a href="mailto:ZiboZhengZZB@163.com">Email</a>
-                    <a href="https://github.com/ZEbirds" target="_blank">GitHub</a>
-                </div>
-            </div>
-        </header>
-
-        <section id="about">
-            <h2>About</h2>
-            <p style="color: var(--text-muted);">
-                Hello! I am an undergraduate student majoring in Mechanical Engineering at the <strong>University of Nottingham Ningbo China (UNNC)</strong>, currently holding a rank of 2/65 in my cohort. I will soon be pursuing a Master's degree in Robotics at the <strong>University of Pennsylvania (UPenn)</strong>.
-            </p>
-            <p style="color: var(--text-muted);">
-                My research focuses on <strong>Embodied AI</strong> and autonomous robot navigation. My long-term career goal is to become an industry researcher, dedicated to bridging high-level natural language instructions with low-level physical robot behaviors, developing consumer-facing service robots that are truly user-friendly for domestic environments.
-            </p>
-            <div class="tags">
-                <span class="tag">Python</span>
-                <span class="tag">C++</span>
-                <span class="tag">ROS Noetic</span>
-                <span class="tag">SLAM</span>
-                <span class="tag">Computer Vision</span>
-            </div>
-        </section>
-
-        <section id="publications">
-            <h2>Selected Publications</h2>
+    <div class="max-w-6xl">
+        <div class="grid-layout">
             
-            <div class="pub-item">
-                <div class="pub-title">
-                    OpenObject-NAV: Open-vocabulary Object-oriented Navigation based on Dynamic Carrier-relationship Scene Graph
-                </div>
-                <div class="pub-authors">
-                    <strong>Zibo Zheng*</strong>, Y. Tang, M. Wang, Y. Deng, et al.
-                </div>
-                <div class="pub-venue">
-                    2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)
-                </div>
+            <div class="lg-col-span-1">
+                <aside class="sidebar">
+                    <div class="avatar-container">
+                        <img src="portrait.jpg" alt="Zibo Zheng" class="avatar">
+                    </div>
+                    
+                    <div class="profile-text">
+                        <h1 class="profile-name">Zibo Zheng</h1>
+                        <p class="profile-title">Robotics Researcher</p>
+                        <p class="profile-inst">UNNC ➔ UPenn</p>
+                    </div>
+
+                    <div class="social-icons">
+                        <a href="mailto:ZiboZhengZZB@163.com" title="Email">
+                            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                            </svg>
+                        </a>
+                        <a href="#" title="Location">
+                            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                            </svg>
+                        </a>
+                        <a href="https://github.com/ZEbirds" target="_blank" title="GitHub">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                                <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="research-interests">
+                        <h3 class="research-title">Research Interests</h3>
+                        <div class="research-list">
+                            <div>Embodied AI</div>
+                            <div>Vision-Language Navigation</div>
+                            <div>Robotic Perception & SLAM</div>
+                        </div>
+                    </div>
+
+                    <button class="like-btn">
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 1rem; height: 1rem;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                        </svg>
+                        <span>Like</span>
+                    </button>
+                </aside>
             </div>
 
-            <div class="pub-item">
-                <div class="pub-title">
-                    OpenIN: Open-vocabulary instance-oriented navigation in dynamic domestic environments
-                </div>
-                <div class="pub-authors">
-                    Y. Tang, M. Wang, Y. Deng, <strong>Zibo Zheng</strong>, et al.
-                </div>
-                <div class="pub-venue">
-                    IEEE Robotics and Automation Letters (RA-L), 2025
-                </div>
+            <div class="lg-col-span-2 main-content">
+                
+                <section>
+                    <h2 class="section-title">About Me</h2>
+                    <div class="prose">
+                        <p>Hello! I am an undergraduate student majoring in Mechanical Engineering at the <strong>University of Nottingham Ningbo China (UNNC)</strong>, currently holding a rank of 2/65 in my cohort. My thesis focuses on <em>SMEAC-Nav: A Semantic Memory-Enhanced Framework for Long-Horizon Embodied Navigation</em>. I will soon be pursuing a Master's degree in Robotics at the <strong>University of Pennsylvania (UPenn)</strong>.</p>
+                        <p>I am deeply passionate about <strong>Embodied AI</strong> and autonomous robot navigation. My long-term career goal is to become an industry researcher, dedicated to bridging high-level human natural language instructions with low-level physical robot behaviors, ultimately developing consumer-facing service robots that are truly user-friendly for domestic environments.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="pub-header">
+                        <h2 class="section-title" style="margin-bottom: 0;">Selected Publications</h2>
+                        <a href="#" class="view-all">View All ➔</a>
+                    </div>
+                    
+                    <div class="pub-list">
+                        <div class="pub-card">
+                            <h3 class="pub-title">OpenObject-NAV: Open-vocabulary Object-oriented Navigation based on Dynamic Carrier-relationship Scene Graph</h3>
+                            <p class="pub-authors">
+                                <strong>Zibo Zheng*</strong>, Y. Tang, M. Wang, Y. Deng, et al.
+                            </p>
+                            <p class="pub-venue">2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</p>
+                            <p class="pub-desc">Proposed the Carrier-Relationship Scene Graph (CRSG) to distinguish static carriers and movable objects for dynamic scene updating, enabling robust open-vocabulary instance navigation.</p>
+                        </div>
+
+                        <div class="pub-card">
+                            <h3 class="pub-title">OpenIN: Open-vocabulary instance-oriented navigation in dynamic domestic environments</h3>
+                            <p class="pub-authors">
+                                Y. Tang, M. Wang, Y. Deng, <strong>Zibo Zheng</strong>, et al.
+                            </p>
+                            <p class="pub-venue">IEEE Robotics and Automation Letters (RA-L), 2025</p>
+                            <p class="pub-desc">Extended the CRSG framework to support multimodal and open-vocabulary instructions in dynamic environments, optimizing candidate target prioritization and room-level commonsense.</p>
+                        </div>
+
+                        <div class="pub-card">
+                            <h3 class="pub-title">The development and analysis of 3D feature Reconstruction Technology for Service Robot Slam system in restaurant environment</h3>
+                            <p class="pub-authors">
+                                <strong>Zibo Zheng</strong>
+                            </p>
+                            <p class="pub-venue">2024 2nd International Conference on Image, Algorithms and Artificial Intelligence (ICIAAI)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="section-title">Experience & Projects</h2>
+                    <div class="exp-list">
+                        
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <h3 class="exp-title">Vision-Language Navigation in Humanoid Robots</h3>
+                                <span class="exp-date">Mar 2026 - Present</span>
+                            </div>
+                            <p class="exp-subtitle">Zhejiang Humanoid Robot Innovation Center | Navigation Algorithm Intern</p>
+                            <div class="exp-content">
+                                Deploying Vision-Language Navigation (VLN) models onto physical humanoid robot platforms by optimizing a hierarchical decision-making architecture. Engineered a semi-autonomous data collection pipeline generating over 100,000 instruction-trajectory pairs to significantly accelerate VLA model training.
+                            </div>
+                        </div>
+
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <h3 class="exp-title">Spatial Cognition and Intelligent Navigation</h3>
+                                <span class="exp-date">Mar 2024 - May 2025</span>
+                            </div>
+                            <p class="exp-subtitle">Beijing Institute of Technology | Research Assistant</p>
+                            <div class="exp-content">
+                                Proposed the Carrier-Relationship Scene Graph (CRSG) and developed an instance navigation strategy formulated as an MDP. Deployed and refined ConceptGraph for real-time 3D semantic scene construction, incorporating LLM commonsense to guide open-vocabulary exploration.
+                            </div>
+                        </div>
+
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <h3 class="exp-title">SLAM for Low-visibility Environments</h3>
+                                <span class="exp-date">Jun 2024 - Nov 2024</span>
+                            </div>
+                            <p class="exp-subtitle">University of Nottingham Ningbo China | Research Assistant</p>
+                            <div class="exp-content">
+                                Designed a multi-sensor fusion platform integrating 4D LiDAR (Unitree AD10) and millimeter-wave radar targeting disaster response. Implemented basic ROS Noetic modules for sensor synchronization and compared mainstream SLAM frameworks (A-LOAM, LIO-SAM).
+                            </div>
+                        </div>
+
+                        <div class="exp-card">
+                            <div class="exp-header">
+                                <h3 class="exp-title">Interactive Visualization System for dToF Sensors</h3>
+                                <span class="exp-date">Aug 2024 - Oct 2024</span>
+                            </div>
+                            <p class="exp-subtitle">Anker Innovations Technology | Algorithm & Platform Intern</p>
+                            <div class="exp-content">
+                                Implemented C++ peak detection methods to improve dToF depth estimation accuracy. Built a real-time data pipeline linking backend 3D point cloud processing with a PyQtGraph-based frontend visualization tool for interactive analysis.
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
             </div>
-
-            <div class="pub-item">
-                <div class="pub-title">
-                    The development and analysis of 3D feature Reconstruction Technology for Service Robot Slam system in restaurant environment
-                </div>
-                <div class="pub-authors">
-                    <strong>Zibo Zheng</strong>
-                </div>
-                <div class="pub-venue">
-                    2nd International Conference on Image, Algorithms and Artificial Intelligence (ICIAAI), 2024
-                </div>
-            </div>
-        </section>
-
-        <section id="experience">
-            <h2>Experience & Projects</h2>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Vision-Language Navigation in Humanoid Robots</h3>
-                    <span class="card-date">Mar 2026 - Present</span>
-                </div>
-                <div class="card-meta">Zhejiang Humanoid Robot Innovation Center | Navigation Algorithm Intern</div>
-                <p class="card-desc">
-                    Deploying VLN models onto physical humanoid robot platforms by optimizing a hierarchical decision-making architecture. Engineered a simulation pipeline generating 100k+ instruction-trajectory pairs to accelerate VLA model training.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Spatial Cognition and Intelligent Navigation</h3>
-                    <span class="card-date">Mar 2024 - May 2025</span>
-                </div>
-                <div class="card-meta">Beijing Institute of Technology | Research Assistant</div>
-                <p class="card-desc">
-                    Proposed the Carrier-Relationship Scene Graph (CRSG) to distinguish static carriers and movable objects. Integrated commonsense knowledge from LLMs and visual-language feature similarity for open-vocabulary instance navigation.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">SLAM for Low-visibility Environments</h3>
-                    <span class="card-date">Jun 2024 - Nov 2024</span>
-                </div>
-                <div class="card-meta">UNNC | Research Assistant</div>
-                <p class="card-desc">
-                    Designed a multi-sensor fusion platform integrating 4D LiDAR and millimeter-wave radar for disaster response. Built the hardware integration framework and implemented ROS synchronization modules.
-                </p>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Interactive dToF Visualization Platform</h3>
-                    <span class="card-date">Aug 2024 - Oct 2024</span>
-                </div>
-                <div class="card-meta">Anker Innovations | Algorithm & Platform Intern</div>
-                <p class="card-desc">
-                    Implemented C++ peak detection methods for dToF depth estimation. Built a real-time data pipeline linked with a PyQtGraph frontend for 3D point cloud rendering and signal analysis.
-                </p>
-            </div>
-        </section>
-
-        <section id="honors">
-            <h2>Honors & Awards</h2>
-            <ul>
-                <li><strong>National Scholarship</strong> (24/25, Top 0.2%)</li>
-                <li><strong>Provincial Outstanding Graduate</strong> (Top 3%)</li>
-                <li><strong>Provost's Scholarship</strong> (23/24 & 24/25, Top 5%)</li>
-                <li><strong>UNNC Outstanding Students & Graduates</strong> (Top 5%)</li>
-            </ul>
-        </section>
-
+        </div>
     </div>
 
 </body>
