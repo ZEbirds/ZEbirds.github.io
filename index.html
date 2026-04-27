@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zibo Zheng | Personal Portfolio</title>
     <style>
+        /* 重新设计的配色方案：低饱和度、专业深色调 */
         :root {
-            --text-main: #2d3436;
-            --text-muted: #636e72;
-            --accent: #0984e3;
-            --glass-bg: rgba(255, 255, 255, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            --text-main: #f5f6fa;
+            --text-muted: #a4b0be;
+            --accent: #70a1ff; /* 柔和的浅蓝色 */
+            --glass-bg: rgba(30, 39, 46, 0.75); /* 深色半透明 */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
         @keyframes gradientBG {
@@ -26,7 +27,8 @@
             margin: 0;
             padding: 0;
             color: var(--text-main);
-            background: linear-gradient(-45deg, #f3e7e9, #e3eeff, #e0c3fc, #8ec5fc);
+            /* 更换为沉稳的深色渐变：深灰、海军蓝与墨绿 */
+            background: linear-gradient(-45deg, #2c3e50, #1a1a2e, #16213e, #0f3460);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             min-height: 100vh;
@@ -43,8 +45,8 @@
 
         .glass-panel {
             background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             box-shadow: var(--glass-shadow);
@@ -69,10 +71,10 @@
             border-radius: 50%;
             object-fit: cover;
             margin: 0 auto 1.5rem auto;
-            border: 4px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background-color: #dfe6e9; 
+            background-color: #2f3542; 
         }
         
         .sidebar:hover .avatar {
@@ -83,6 +85,7 @@
             margin: 0 0 0.5rem 0;
             font-size: 2rem;
             letter-spacing: -0.5px;
+            color: #fff;
         }
 
         .sidebar p {
@@ -101,6 +104,11 @@
         .contact-links li {
             margin-bottom: 1rem;
             font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .contact-links strong {
+            color: var(--text-main);
         }
 
         .contact-links a {
@@ -111,7 +119,7 @@
         }
 
         .contact-links a:hover {
-            color: #0056b3;
+            color: #fff;
             text-decoration: underline;
         }
 
@@ -128,14 +136,14 @@
 
         section:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(31, 38, 135, 0.1);
-            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            background: rgba(47, 53, 66, 0.85);
         }
 
         h2 {
             margin-top: 0;
             font-size: 1.5rem;
-            color: var(--text-main);
+            color: #fff;
             position: relative;
             padding-bottom: 10px;
             margin-bottom: 1.5rem;
@@ -165,8 +173,8 @@
         }
 
         .tag {
-            background: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--text-main);
             padding: 6px 16px;
             border-radius: 20px;
@@ -177,32 +185,33 @@
 
         .tag:hover {
             background: var(--accent);
-            color: white;
+            color: #1a1a2e;
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 5px 15px rgba(9, 132, 227, 0.3);
+            box-shadow: 0 5px 15px rgba(112, 161, 255, 0.4);
             border-color: var(--accent);
+            font-weight: 600;
         }
 
         .project {
             margin-bottom: 2rem;
             padding: 1.5rem;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid transparent;
             transition: all 0.3s ease;
             position: relative;
         }
 
         .project:hover {
-            background: rgba(255, 255, 255, 0.6);
-            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.1);
             transform: translateX(10px);
         }
 
         .project h3 {
             margin-top: 0;
             margin-bottom: 0.3rem;
-            color: var(--text-main);
+            color: #fff;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -216,18 +225,20 @@
         }
 
         .github-link {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            background: rgba(0,0,0,0.05);
-            padding: 4px 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 4px 12px;
             border-radius: 15px;
             text-decoration: none;
             transition: all 0.3s ease;
+            border: 1px solid transparent;
         }
 
         .github-link:hover {
-            background: var(--text-main);
-            color: white;
+            background: var(--accent);
+            color: #1a1a2e;
+            border-color: var(--accent);
         }
 
         .project:last-child {
@@ -248,9 +259,13 @@
 
         ul.custom-list {
             padding-left: 1.2rem;
+            color: var(--text-muted);
         }
         ul.custom-list li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+        ul.custom-list strong {
+            color: var(--text-main);
         }
 
         @media (max-width: 850px) {
@@ -272,23 +287,23 @@
     <div class="layout-wrapper">
         
         <aside class="sidebar glass-panel fade-in-element is-visible">
-            <img class="avatar" src="https://via.placeholder.com/150" alt="Avatar">
+            <img class="avatar" src="https://github.com/ZEbirds/ZEbirds.github.io/blob/main/portrait.jpg" alt="Avatar">
             
-            <h1>Zibo Zheng [cite: 1]</h1>
+            <h1>Zibo Zheng</h1>
             <p>Robotics Researcher<br>Embodied AI & Home Service Robots</p>
             
             <ul class="contact-links">
-                <li><strong>Phone:</strong> <br>+86 13959185819 [cite: 2]</li>
-                <li><strong>Email:</strong> <br><a href="mailto:ZiboZhengZZB@163.com">ZiboZhengZZB@163.com [cite: 2]</a></li>
-                <li><strong>GitHub:</strong> <br><a href="#" target="_blank">[Insert GitHub Link Here]</a></li>
+                <li><strong>Phone:</strong> <br>+86 13959185819</li>
+                <li><strong>Email:</strong> <br><a href="mailto:ZiboZhengZZB@163.com">ZiboZhengZZB@163.com</a></li>
+                <li><strong>GitHub:</strong> <br><a href="https://github.com/ZEbirds" target="_blank">github.com/ZEbirds</a></li>
                 <li><strong>Location:</strong> <br>Ningbo -> Philadelphia</li>
             </ul>
 
             <div class="tags" style="justify-content: center;">
-                <span class="tag">C++ [cite: 97]</span>
-                <span class="tag">Python [cite: 97]</span>
-                <span class="tag">ROS Noetic [cite: 53]</span>
-                <span class="tag">SLAM [cite: 52]</span>
+                <span class="tag">C++</span>
+                <span class="tag">Python</span>
+                <span class="tag">ROS Noetic</span>
+                <span class="tag">SLAM</span>
             </div>
         </aside>
 
@@ -296,16 +311,16 @@
             
             <section id="about" class="glass-panel fade-in-element">
                 <h2>About Me</h2>
-                <p>Hello! I am an undergraduate student majoring in Mechanical Engineering at the University of Nottingham Ningbo China (UNNC) [cite: 3, 4], currently holding a rank of 2/65 in my cohort[cite: 6]. My thesis focuses on <em>SMEAC-Nav: A Semantic Memory-Enhanced Framework for Long-Horizon Embodied Navigation</em>[cite: 7]. I will soon be pursuing a Master's degree in Robotics at the University of Pennsylvania (UPenn).</p>
+                <p>Hello! I am an undergraduate student majoring in Mechanical Engineering at the University of Nottingham Ningbo China (UNNC), currently holding a rank of 2/65 in my cohort. My thesis focuses on <em>SMEAC-Nav: A Semantic Memory-Enhanced Framework for Long-Horizon Embodied Navigation</em>. I will soon be pursuing a Master's degree in Robotics at the University of Pennsylvania (UPenn).</p>
                 <p>I am deeply passionate about Embodied AI and autonomous robot navigation. My long-term career goal is to become an industry researcher, dedicated to bridging high-level human natural language instructions with low-level physical robot behaviors, ultimately developing consumer-facing service robots that are truly user-friendly for domestic environments.</p>
             </section>
 
             <section id="publications" class="glass-panel fade-in-element">
                 <h2>Publications</h2>
                 <ul class="custom-list">
-                    <li><strong>Zheng, Z.*</strong>, Tang, Y., Wang, M., Deng, Y., et al. (2025) 'OpenObject-NAV: Open-vocabulary Object-oriented Navigation based on Dynamic Carrier-relationship Scene Graph', <em>2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</em>[cite: 16, 17].</li>
-                    <li>Tang, Y., Wang, M., Deng, Y., <strong>Zheng, Z.</strong>, et al. (2025) 'OpenIN: Open-vocabulary instance-oriented navigation in dynamic domestic environments', <em>IEEE Robotics and Automation Letters</em>[cite: 13, 14].</li>
-                    <li><strong>Zheng, Z.</strong> (2024) 'The development and analysis of 3D feature Reconstruction Technology for Service Robot Slam system in restaurant environment', <em>2024 2nd International Conference on Image, Algorithms and Artificial Intelligence (ICIAAI)</em>[cite: 18].</li>
+                    <li><strong>Zibo Zheng*</strong>, Y. Tang, M. Wang, Y. Deng, et al. (2025) 'OpenObject-NAV: Open-vocabulary Object-oriented Navigation based on Dynamic Carrier-relationship Scene Graph', <em>IROS 2025</em>.</li>
+                    <li>Y. Tang, M. Wang, Y. Deng, <strong>Zibo Zheng</strong>, et al. (2025) 'OpenIN: Open-vocabulary instance-oriented navigation in dynamic domestic environments', <em>IEEE RA-L</em>.</li>
+                    <li><strong>Zibo Zheng</strong> (2024) '3D Feature Reconstruction Technology for Service Robot SLAM in Restaurant Environments', <em>ICIAAI 2024</em>.</li>
                 </ul>
             </section>
 
@@ -314,63 +329,63 @@
                 
                 <div class="project">
                     <h3>
-                        Vision-Language Navigation in Humanoid Robots
-                        <a href="#" class="github-link" target="_blank">[Add GitHub Link]</a>
+                        Humanoid Vision-Language Navigation
+                        <a href="https://github.com/ZEbirds" class="github-link" target="_blank">View on GitHub</a>
                     </h3>
-                    <div class="meta">Zhejiang Humanoid Robot Innovation Center | Mar 2026 - Present [cite: 83, 85]</div>
-                    <p>Deployed Vision-Language Navigation (VLN) models onto physical humanoid robot platforms by optimizing a hierarchical decision-making architecture[cite: 86]. Engineered a semi-autonomous data collection pipeline generating over 100,000 instruction-trajectory pairs to accelerate VLA model training[cite: 87].</p>
+                    <div class="meta">Zhejiang Humanoid Robot Innovation Center | 2026 - Present</div>
+                    <p>Optimizing hierarchical decision-making for real-world tasks on humanoid platforms. Engineered a simulation pipeline generating 100k+ instruction-trajectory pairs for VLA model training.</p>
                 </div>
 
                 <div class="project">
                     <h3>
-                        Spatial Cognition and Intelligent Navigation
-                        <a href="#" class="github-link" target="_blank">[Add GitHub Link]</a>
+                        Spatial Cognition & CRSG
+                        <a href="https://github.com/ZEbirds" class="github-link" target="_blank">View on GitHub</a>
                     </h3>
-                    <div class="meta">Beijing Institute of Technology | Mar 2024 - May 2025 [cite: 21, 22]</div>
-                    <p>Proposed the Carrier-Relationship Scene Graph (CRSG) to distinguish static carriers and movable objects for dynamic scene updating[cite: 25]. Developed an instance navigation strategy integrating commonsense knowledge from LLMs and visual-language feature similarity[cite: 27]. Extended the system to support multimodal and open-vocabulary instructions, validating performance across Habitat simulations and real-world Autolabor platforms[cite: 33, 39].</p>
+                    <div class="meta">Beijing Institute of Technology | 2024 - 2025</div>
+                    <p>Proposed the Carrier-Relationship Scene Graph (CRSG) for dynamic scene updating. Integrated LLM commonsense with visual-language features for open-vocabulary navigation.</p>
                 </div>
 
                 <div class="project">
                     <h3>
-                        SLAM for Low-visibility Environments
-                        <a href="#" class="github-link" target="_blank">[Add GitHub Link]</a>
+                        Low-visibility SLAM Fusion
+                        <a href="https://github.com/ZEbirds" class="github-link" target="_blank">View on GitHub</a>
                     </h3>
-                    <div class="meta">University of Nottingham Ningbo China | Jun 2024 - Nov 2024 [cite: 45, 48]</div>
-                    <p>Designed a multi-sensor fusion platform targeting applications in disaster response and industrial inspection[cite: 49]. Built a sensor integration framework for 4D LiDAR, millimeter-wave radar, and IMU modules [cite: 50], and implemented basic ROS Noetic modules for sensor synchronization[cite: 53].</p>
+                    <div class="meta">UNNC Research Assistant | 2024</div>
+                    <p>Designed a fusion platform using 4D LiDAR and mmWave radar for disaster response. Built the hardware integration framework and sensor synchronization modules in ROS.</p>
                 </div>
 
                 <div class="project">
                     <h3>
-                        Interactive dToF Visualization Platform
-                        <a href="#" class="github-link" target="_blank">[Add GitHub Link]</a>
+                        Interactive dToF Platform
+                        <a href="https://github.com/ZEbirds" class="github-link" target="_blank">View on GitHub</a>
                     </h3>
-                    <div class="meta">Anker Innovations Technology | Aug 2024 - Oct 2024 [cite: 75, 78]</div>
-                    <p>Implemented peak detection methods in C++ to improve dToF depth estimation and integrated post-processing techniques to reconstruct 3D surfaces[cite: 79, 80]. Built a real-time data pipeline linked with a PyQtGraph-based frontend for 3D point cloud display and user interaction[cite: 81].</p>
+                    <div class="meta">Anker Innovations | 2024</div>
+                    <p>Developed C++ peak detection algorithms for high-precision depth estimation. Created a PyQtGraph frontend for real-time 3D point cloud interaction and signal analysis.</p>
                 </div>
 
                 <div class="project">
                     <h3>
-                        Multi-Sensor Fusion & Path Planning
-                        <a href="#" class="github-link" target="_blank">[Add GitHub Link]</a>
+                        Cambridge Robotics Internship
+                        <a href="https://github.com/ZEbirds" class="github-link" target="_blank">View on GitHub</a>
                     </h3>
-                    <div class="meta">University of Cambridge | Jul 2023 - May 2024 [cite: 56, 59]</div>
-                    <p>Developed Kalman filter sensor fusion algorithms integrating LiDAR, radar, and camera data[cite: 60]. Designed an automatic parameter optimization pipeline that reduced trajectory error by around 40% and improved dynamic obstacle avoidance success rate to 98%[cite: 61, 62]. Implemented and evaluated Wavefront, A*, Hybrid A*, and Q-Learning algorithms in MATLAB[cite: 65].</p>
+                    <div class="meta">University of Cambridge | 2023 - 2024</div>
+                    <p>Applied Kalman filters for multi-sensor fusion and optimized path planning algorithms (A*, Hybrid A*, Q-Learning). Reduced trajectory error by 40% using automated parameter tuning.</p>
                 </div>
             </section>
 
             <section id="honors" class="glass-panel fade-in-element">
                 <h2>Honors & Awards</h2>
                 <ul class="custom-list">
-                    <li><strong>National Scholarship</strong> (24/25, Top 0.2%) [cite: 8]</li>
-                    <li><strong>Zhejiang Excellent Graduates / Provincial Outstanding Graduate</strong> (Top 3%) [cite: 8]</li>
-                    <li><strong>Provost's Scholarship</strong> (23/24 & 24/25, Top 5%) [cite: 8]</li>
-                    <li><strong>UNNC Outstanding Students / Graduates</strong> (Top 5%) [cite: 8]</li>
+                    <li><strong>National Scholarship</strong> (Top 0.2%)</li>
+                    <li><strong>Zhejiang Excellent Graduate</strong> (Top 3%)</li>
+                    <li><strong>Provost's Scholarship</strong> (Twice, Top 5%)</li>
+                    <li><strong>UNNC Outstanding Student/Graduate</strong> (Top 5%)</li>
                 </ul>
             </section>
 
             <section id="life" class="glass-panel fade-in-element">
                 <h2>Life & Hobbies</h2>
-                <p>Outside of research and coding, I am an active participant in street dance culture. As the Popping Team Leader of the Shuffle Crew Dance Society at UNNC, I organized training sessions and coordinated collaborations with local studios[cite: 89, 90, 91, 93]. I recently led my team to win 2nd place in the 4v4 Freestyle at the 2nd Ningbo Intercollegiate Street Dance Competition[cite: 93, 94].</p>
+                <p>As the Popping Team Leader at UNNC Shuffle Crew, I led rehearsals and performances for various campus showcases. I recently secured 2nd place in the 4v4 Freestyle at the 2nd Ningbo Intercollegiate Street Dance Competition.</p>
             </section>
 
         </main>
