@@ -378,26 +378,26 @@
         }
 
         /* =========================================
-           Projects 板块 (左图右文) - 关键修改区
+           Projects 板块 (左图右文)
            ========================================= */
         .project-card {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
         }
 
         @media (min-width: 768px) {
             .project-card {
                 flex-direction: row;
-                gap: 1.5rem; /* 减小图文之间的间距 */
-                align-items: flex-start; /* 🔑 确保视频框不会被文字强行拉伸 */
+                gap: 1.5rem; 
+                align-items: flex-start; 
             }
         }
 
         .project-img-wrapper {
-            flex: 0 0 240px; /* 🔑 大幅缩小视频宽度 */
-            aspect-ratio: 16 / 9; /* 🔑 强制锁定 16:9 比例，防止图片/视频变形或撑破 */
+            flex: 0 0 240px; 
+            aspect-ratio: 16 / 9; 
             border-radius: 0.5rem;
             overflow: hidden;
             border: 1px solid var(--neutral-200);
@@ -405,6 +405,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            line-height: 0;
         }
 
         .project-img {
@@ -443,7 +444,7 @@
 
         .project-title {
             font-family: var(--font-serif);
-            font-size: 1.15rem; /* 🔑 缩小标题字号，看起来更紧凑精致 */
+            font-size: 1.15rem; 
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 0.25rem;
@@ -451,18 +452,17 @@
         }
 
         .project-authors {
-            font-size: 0.9rem; /* 🔑 缩小作者字号 */
+            font-size: 0.9rem; 
             color: var(--neutral-600);
             margin-bottom: 0.5rem;
         }
 
         .project-desc {
             font-size: 0.9rem;
-            color: var(--neutral-500); /* 更改为更淡的灰色，复刻示例 */
+            color: var(--neutral-500); 
             font-style: italic;
             margin-bottom: 1rem;
             line-height: 1.5;
-            /* 🔑 删除了之前的左侧竖线边框，使其更符合干净的极简风 */
         }
 
         .project-links {
@@ -551,8 +551,38 @@
             color: var(--primary); 
         }
 
+        /* =========================================
+           访客流量地图区块 (Visitor Map)
+           ========================================= */
+        .visitor-map-container {
+            margin-top: 2rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--neutral-200);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .visitor-map-container h2 {
+            border: none;
+            padding-bottom: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            letter-spacing: 0.1em;
+        }
+
+        .visitor-map-widget {
+            width: 100%;
+            max-width: 600px; 
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: var(--primary); 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
         @media (max-width: 900px) {
-            .nav-menu { display: none; } /* 移动端隐藏中间菜单防拥挤 */
+            .nav-menu { display: none; } 
         }
     </style>
 </head>
@@ -874,6 +904,13 @@
                     <p>I recently led my team to win 2nd place in the 4v4 Freestyle at the 2nd Ningbo Intercollegiate Street Dance Competition. This passion keeps me physically active and significantly enhances my teamwork skills and stage presence!</p>
                 </div>
             </section>
+
+            <div class="visitor-map-container">
+                <h2>Visitor Traffic</h2>
+                <div class="visitor-map-widget">
+                    <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=3Y8aknIaDGCbUFUemrUAUeTeVOuV28U2atgKX_PJ6_M"></script>
+                </div>
+            </div>
 
         </div>
     </div>
