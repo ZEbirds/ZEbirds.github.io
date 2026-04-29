@@ -384,25 +384,24 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
         }
 
         @media (min-width: 768px) {
             .project-card {
                 flex-direction: row;
-                gap: 2rem;
+                gap: 2.5rem; /* 增加左右间距让呼吸感更好 */
+                align-items: flex-start; /* 🔑 解决视频框被文字拉长拉伸的核心代码 */
             }
         }
 
         .project-img-wrapper {
-            flex: 0 0 280px; 
+            flex: 0 0 360px; /* 🔑 扩大视频的固定宽度 (从280px增加到360px)，压缩文字区域宽度 */
             border-radius: 0.5rem;
             overflow: hidden;
             border: 1px solid var(--neutral-200);
             background: var(--neutral-50);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            line-height: 0; /* 消除视频底部的默认空白 */
         }
 
         .project-img {
@@ -430,18 +429,18 @@
             background: #eff6ff;
             padding: 0.2rem 0.6rem;
             border-radius: 1rem;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
         }
 
         .project-year {
             color: var(--neutral-500);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .project-title {
             font-family: var(--font-serif);
-            font-size: 1.4rem;
+            font-size: 1.25rem; /* 🔑 稍微缩小标题，显得更紧凑 */
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 0.5rem;
@@ -449,13 +448,13 @@
         }
 
         .project-authors {
-            font-size: 0.95rem;
+            font-size: 0.9rem; /* 🔑 缩小字号 */
             color: var(--neutral-600);
             margin-bottom: 0.75rem;
         }
 
         .project-desc {
-            font-size: 0.95rem;
+            font-size: 0.9rem; /* 🔑 缩小字号 */
             color: var(--neutral-600);
             font-style: italic;
             margin-bottom: 1.2rem;
@@ -501,7 +500,7 @@
             color: var(--neutral-500);
             padding: 0.2rem 0.5rem;
             border-radius: 0.25rem;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         /* =========================================
@@ -549,8 +548,38 @@
             color: var(--primary); 
         }
 
+        /* =========================================
+           访客流量地图区块 (Visitor Map)
+           ========================================= */
+        .visitor-map-container {
+            margin-top: 2rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--neutral-200);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .visitor-map-container h2 {
+            border: none;
+            padding-bottom: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            letter-spacing: 0.1em;
+        }
+
+        .visitor-map-widget {
+            width: 100%;
+            max-width: 600px; /* 限制地图最大宽度 */
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: var(--primary); /* 匹配深色主题的背景 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
         @media (max-width: 900px) {
-            .nav-menu { display: none; } /* 移动端隐藏中间菜单防拥挤 */
+            .nav-menu { display: none; }
         }
     </style>
 </head>
@@ -716,7 +745,7 @@
 
                 <div class="project-card">
                     <div class="project-img-wrapper">
-                        <video src="Animation for fish feeder.mp4" autoplay loop muted playsinline class="project-img"></video>
+                        <video src="Animation for fish feeder.mp4" class="project-img" autoplay loop muted playsinline></video>
                     </div>
                     <div class="project-content">
                         <div class="project-meta">
@@ -872,6 +901,15 @@
                     <p>I recently led my team to win 2nd place in the 4v4 Freestyle at the 2nd Ningbo Intercollegiate Street Dance Competition. This passion keeps me physically active and significantly enhances my teamwork skills and stage presence!</p>
                 </div>
             </section>
+
+            <div class="visitor-map-container">
+                <h2>Visitor Traffic</h2>
+                <div class="visitor-map-widget">
+                    <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=YOUR_TRACKING_CODE_HERE"></script>
+                    
+                    <img src="https://clustrmaps.com/map_v2.png?d=dummy" alt="Visitor Map Placeholder" style="width: 100%; display: block;"/>
+                </div>
+            </div>
 
         </div>
     </div>
