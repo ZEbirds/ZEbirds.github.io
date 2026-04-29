@@ -552,7 +552,7 @@
         }
 
         /* =========================================
-           访客流量地图区块 (Visitor Map)
+           访客流量地图区块 (Visitor Map) 极致精简版
            ========================================= */
         .visitor-map-container {
             margin-top: 2rem;
@@ -567,19 +567,26 @@
         .visitor-map-container h2 {
             border: none;
             padding-bottom: 0;
-            margin-bottom: 1.5rem;
-            font-size: 1.25rem;
-            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+            color: var(--neutral-600);
         }
 
         .visitor-map-widget {
             width: 100%;
-            max-width: 600px; 
+            max-width: 350px; /* 🔑 大幅缩小地图，让它显得精致不占空间 */
             border-radius: 0.5rem;
             overflow: hidden;
-            background: var(--primary); 
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            background: #ffffff; /* 🔑 强制纯白背景，符合浅色学术风 */
+            border: 1px solid var(--neutral-200);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            padding: 0.5rem;
         }
+
+        /* 隐藏地图自带的一些多余边框 */
+        .visitor-map-widget a { display: block; line-height: 0; }
+        .visitor-map-widget img { border-radius: 0.25rem; }
 
         @media (max-width: 900px) {
             .nav-menu { display: none; } 
@@ -908,7 +915,7 @@
             <div class="visitor-map-container">
                 <h2>Visitor Traffic</h2>
                 <div class="visitor-map-widget">
-                    <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=3Y8aknIaDGCbUFUemrUAUeTeVOuV28U2atgKX_PJ6_M"></script>
+                    <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=3Y8aknIaDGCbUFUemrUAUeTeVOuV28U2atgKX_PJ6_M&cl=ffffff&w=a"></script>
                 </div>
             </div>
 
