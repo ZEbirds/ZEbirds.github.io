@@ -378,35 +378,38 @@
         }
 
         /* =========================================
-           Projects 板块 (左图右文)
+           Projects 板块 (左图右文) - 关键修改区
            ========================================= */
         .project-card {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            margin-bottom: 3.5rem;
+            margin-bottom: 3rem;
         }
 
         @media (min-width: 768px) {
             .project-card {
                 flex-direction: row;
-                gap: 2.5rem; /* 增加左右间距让呼吸感更好 */
-                align-items: flex-start; /* 🔑 解决视频框被文字拉长拉伸的核心代码 */
+                gap: 1.5rem; /* 减小图文之间的间距 */
+                align-items: flex-start; /* 🔑 确保视频框不会被文字强行拉伸 */
             }
         }
 
         .project-img-wrapper {
-            flex: 0 0 360px; /* 🔑 扩大视频的固定宽度 (从280px增加到360px)，压缩文字区域宽度 */
+            flex: 0 0 240px; /* 🔑 大幅缩小视频宽度 */
+            aspect-ratio: 16 / 9; /* 🔑 强制锁定 16:9 比例，防止图片/视频变形或撑破 */
             border-radius: 0.5rem;
             overflow: hidden;
             border: 1px solid var(--neutral-200);
             background: var(--neutral-50);
-            line-height: 0; /* 消除视频底部的默认空白 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .project-img {
             width: 100%;
-            height: auto;
+            height: 100%;
             object-fit: cover;
             display: block;
         }
@@ -427,7 +430,7 @@
         .project-badge {
             color: #3b82f6; 
             background: #eff6ff;
-            padding: 0.2rem 0.6rem;
+            padding: 0.2rem 0.5rem;
             border-radius: 1rem;
             font-size: 0.8rem;
             font-weight: 500;
@@ -440,42 +443,42 @@
 
         .project-title {
             font-family: var(--font-serif);
-            font-size: 1.25rem; /* 🔑 稍微缩小标题，显得更紧凑 */
+            font-size: 1.15rem; /* 🔑 缩小标题字号，看起来更紧凑精致 */
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
             line-height: 1.3;
         }
 
         .project-authors {
-            font-size: 0.9rem; /* 🔑 缩小字号 */
+            font-size: 0.9rem; /* 🔑 缩小作者字号 */
             color: var(--neutral-600);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
         .project-desc {
-            font-size: 0.9rem; /* 🔑 缩小字号 */
-            color: var(--neutral-600);
+            font-size: 0.9rem;
+            color: var(--neutral-500); /* 更改为更淡的灰色，复刻示例 */
             font-style: italic;
-            margin-bottom: 1.2rem;
-            border-left: 2px solid var(--neutral-200);
-            padding-left: 1rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            /* 🔑 删除了之前的左侧竖线边框，使其更符合干净的极简风 */
         }
 
         .project-links {
             display: flex;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .project-btn {
             display: inline-flex;
             align-items: center;
             gap: 0.25rem;
-            padding: 0.3rem 0.75rem;
+            padding: 0.25rem 0.6rem;
             border: 1px solid var(--neutral-200);
             border-radius: 0.375rem;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--neutral-600);
             font-weight: 500;
             background: var(--background);
@@ -498,7 +501,7 @@
             background: var(--neutral-50);
             border: 1px solid var(--neutral-100);
             color: var(--neutral-500);
-            padding: 0.2rem 0.5rem;
+            padding: 0.15rem 0.4rem;
             border-radius: 0.25rem;
             font-size: 0.75rem;
         }
@@ -548,38 +551,8 @@
             color: var(--primary); 
         }
 
-        /* =========================================
-           访客流量地图区块 (Visitor Map)
-           ========================================= */
-        .visitor-map-container {
-            margin-top: 2rem;
-            padding-top: 3rem;
-            border-top: 1px solid var(--neutral-200);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        
-        .visitor-map-container h2 {
-            border: none;
-            padding-bottom: 0;
-            margin-bottom: 1.5rem;
-            font-size: 1.25rem;
-            letter-spacing: 0.1em;
-        }
-
-        .visitor-map-widget {
-            width: 100%;
-            max-width: 600px; /* 限制地图最大宽度 */
-            border-radius: 0.5rem;
-            overflow: hidden;
-            background: var(--primary); /* 匹配深色主题的背景 */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
         @media (max-width: 900px) {
-            .nav-menu { display: none; }
+            .nav-menu { display: none; } /* 移动端隐藏中间菜单防拥挤 */
         }
     </style>
 </head>
@@ -701,7 +674,7 @@
                             Y. Tang, M. Wang, Y. Deng, <strong>Zibo Zheng</strong>, et al.
                         </div>
                         <div class="project-desc">
-                            Extended the CRSG framework for multimodal and multi-type open-vocabulary navigation. Enhanced the system with an online adaptation mechanism for lifelong navigation in dynamic environments.
+                            A multimodal open-vocabulary navigation system featuring an online adaptation mechanism for lifelong navigation in dynamic domestic environments.
                         </div>
                         <div class="project-links">
                             <a href="https://openin-nav.github.io/" target="_blank" class="project-btn">SITE ↗</a>
@@ -729,7 +702,7 @@
                             Y. Tang, M. Wang, <strong>Zibo Zheng* (Co-third)</strong>, Y. Deng, et al.
                         </div>
                         <div class="project-desc">
-                            Introduced the Carrier-Relationship Scene Graph (CRSG) to distinguish static carriers and movable objects. Developed an instance navigation strategy formulated as an MDP integrating LLM commonsense.
+                            A semantic navigation framework introducing the Carrier-Relationship Scene Graph (CRSG) and an MDP-based strategy guided by LLM commonsense.
                         </div>
                         <div class="project-links">
                             <a href="https://openobject-nav.github.io/" target="_blank" class="project-btn">SITE ↗</a>
@@ -757,7 +730,7 @@
                             Advisor: Prof. Yong Ren
                         </div>
                         <div class="project-desc">
-                            Designed a solar-powered autonomous fish feeder. Engineered an 8-module storage system with pneumatic dispersion, and integrated a Raspberry Pi 4B control system for scheduling and automated self-cleaning.
+                            A solar-powered, wind-resistant autonomous fish feeder featuring modular pneumatic dispersion and an automated self-cleaning control system.
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/ZEbirds/Autonomous-Fish-Feeder" target="_blank" class="project-btn">CODE ↗</a>
@@ -901,15 +874,6 @@
                     <p>I recently led my team to win 2nd place in the 4v4 Freestyle at the 2nd Ningbo Intercollegiate Street Dance Competition. This passion keeps me physically active and significantly enhances my teamwork skills and stage presence!</p>
                 </div>
             </section>
-
-            <div class="visitor-map-container">
-                <h2>Visitor Traffic</h2>
-                <div class="visitor-map-widget">
-                    <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=YOUR_TRACKING_CODE_HERE"></script>
-                    
-                    <img src="https://clustrmaps.com/map_v2.png?d=dummy" alt="Visitor Map Placeholder" style="width: 100%; display: block;"/>
-                </div>
-            </div>
 
         </div>
     </div>
